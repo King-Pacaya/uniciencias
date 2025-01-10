@@ -300,57 +300,94 @@ startDiagnostic.addEventListener('click', () => {
 let currentQuestion = 0;
 const questions = [
   {
-    text: 'Learning is not a linear process. It’s not something you can master overnight. The more time and effort you put into studying, the more you’ll improve over time.',
-    questionSK: 'What is the main idea of the text?',
-    alternativesSK: ['a) Learning is difficult but rewarding.', 'b) Improvement takes time and effort.', 'c) Studying is useless.', 'd) Learning is easy.'],
-    questionSC: 'According to the text, how does learning work?',
-    alternativesSC: ['a) You learn instantly.', 'b) You improve over time with effort.', 'c) You only need to study once.', 'd) You must practice every day.'],
+    text: "Knowledge is a powerful tool that enables individuals to unlock opportunities and achieve their full potential.",
+    questionSK: "What is the central theme of this text?",
+    alternativesSK: ["a) Knowledge is irrelevant.", "b) Knowledge empowers and opens opportunities.", "c) Knowledge hinders growth.", "d) Knowledge is limited."],
+    questionSC: "What does knowledge enable according to the text?",
+    alternativesSC: ["a) Unlocking opportunities.", "b) Limiting potential.", "c) Creating challenges.", "d) Hindering success."],
     correctAnswerSK: 1,
-    correctAnswerSC: 1,
-    hintRed: 'a',
-    hintBlue: 'b'
+    correctAnswerSC: 0,
+    hintRed: "to",
+    hintBlue: "throughout"
   },
   {
-    text: 'Teaching others is one of the best ways to solidify your understanding. When you explain concepts to someone else, you gain a deeper understanding yourself.',
-    questionSK: 'What is the main point of the paragraph?',
-    alternativesSK: ['a) Teaching helps others.', 'b) Teaching reinforces your own understanding.', 'c) Teaching is difficult.', 'd) Teaching is a waste of time.'],
-    questionSC: 'What happens when you teach someone else?',
-    alternativesSC: ['a) You forget everything.', 'b) You deepen your own understanding.', 'c) You learn nothing.', 'd) You get frustrated.'],
+    text: "Education is not just about acquiring facts; it’s about developing critical thinking and problem-solving skills.",
+    questionSK: "What is the primary idea of this passage?",
+    alternativesSK: ["a) Education has no purpose.", "b) Education is only for children.", "c) Education develops important skills.", "d) Education is solely about facts."],
+    questionSC: "What does education help to develop?",
+    alternativesSC: ["a) Critical thinking and problem-solving.", "b) Memory skills.", "c) Physical strength.", "d) Artistic abilities."],
+    correctAnswerSK: 2,
+    correctAnswerSC: 0,
+    hintRed: "minds",
+    hintBlue: "opens"
+  },
+  {
+    text: "Lifelong learning encourages individuals to adapt to changes and stay relevant in a fast-paced world.",
+    questionSK: "What does lifelong learning promote?",
+    alternativesSK: ["a) Isolation.", "b) Resistance to change.", "c) Adaptability and relevance.", "d) Stagnation."],
+    questionSC: "What does lifelong learning help individuals achieve?",
+    alternativesSC: ["a) Relevance in a changing world.", "b) Stagnation.", "c) Resistance to growth.", "d) Limitation of knowledge."],
+    correctAnswerSK: 2,
+    correctAnswerSC: 0,
+    hintRed: "Education",
+    hintBlue: "Knowledge"
+  },
+  {
+    text: "Continuous education broadens perspectives and fosters innovation by introducing new ideas.",
+    questionSK: "What is the main benefit of continuous education?",
+    alternativesSK: ["a) Promoting outdated ideas.", "b) Broadening perspectives and fostering innovation.", "c) Creating barriers.", "d) Limiting creativity."],
+    questionSC: "What does continuous education introduce?",
+    alternativesSC: ["a) New ideas.", "b) Old concepts.", "c) Restrictions.", "d) Unnecessary details."],
+    correctAnswerSK: 1,
+    correctAnswerSC: 2,
+    hintRed: "empowers",
+    hintBlue: "doors"
+  },
+  {
+    text: "Learning from mistakes is essential for personal and professional growth.",
+    questionSK: "What is emphasized as crucial for growth?",
+    alternativesSK: ["a) Avoiding mistakes.", "b) Ignoring errors.", "c) Learning from mistakes.", "d) Perfection."],
+    questionSC: "According to the text, what is essential for growth?",
+    alternativesSC: ["a) Learning from mistakes.", "b) Avoiding risks.", "c) Ignoring challenges.", "d) Pursuing perfection."],
+    correctAnswerSK: 2,
+    correctAnswerSC: 3,
+    hintRed: "achieve",
+    hintBlue: "fosters"
+  },
+  {
+    text: "Collaborative learning enhances understanding by allowing individuals to share and compare ideas.",
+    questionSK: "What is the benefit of collaborative learning?",
+    alternativesSK: ["a) Creating confusion.", "b) Enhancing understanding through idea sharing.", "c) Hindering communication.", "d) Discouraging teamwork."],
+    questionSC: "How does collaborative learning improve understanding?",
+    alternativesSC: ["a) By sharing and comparing ideas.", "b) By working alone.", "c) By ignoring feedback.", "d) By repeating the same ideas."],
+    correctAnswerSK: 1,
+    correctAnswerSC: 2,
+    hintRed: "and",
+    hintBlue: "growth"
+  },
+  {
+    text: "A growth mindset focuses on embracing challenges as opportunities to learn and improve.",
+    questionSK: "What is the key aspect of a growth mindset?",
+    alternativesSK: ["a) Believing in fixed abilities.", "b) Embracing challenges to learn and improve.", "c) Avoiding difficulties.", "d) Resisting change."],
+    questionSC: "What does a growth mindset encourage individuals to do?",
+    alternativesSC: ["a) Embrace challenges.", "b) Avoid learning.", "c) Reject opportunities.", "d) Stay passive."],
     correctAnswerSK: 1,
     correctAnswerSC: 1,
-    hintRed: 'a',
-    hintBlue: 'b'
+    hintRed: "inspires",
+    hintBlue: "and"
+  },
+  {
+    text: "Learning should be seen as a journey, not a destination, with each step bringing new insights and understanding.",
+    questionSK: "What metaphor does the text use for learning?",
+    alternativesSK: ["a) A destination.", "b) A journey.", "c) A competition.", "d) A barrier."],
+    questionSC: "How should learning be perceived according to the text?",
+    alternativesSC: ["a) As a journey.", "b) As a destination.", "c) As a race.", "d) As a challenge."],
+    correctAnswerSK: 1,
+    correctAnswerSC: 3,
+    hintRed: "change",
+    hintBlue: "life"
   }
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 let hints = [];
 let isAnsweringFinal = false;
@@ -526,7 +563,7 @@ function completeFinalPhase() {
   const finalTitle = finalPhase.querySelector('.question-title');
 
   // Obtener la respuesta del usuario
-  const correctAnswer = color === 'red' ? 'Red' : 'Blue'; // Respuesta final según el equipo
+  const correctAnswer = color === 'red' ? 'red' : 'blue'; // Respuesta final según el equipo
   const userAnswer = document.getElementById('finalAnswer').value;
 
   // Si la respuesta es correcta
@@ -546,7 +583,7 @@ function completeFinalPhase() {
 function checkFinalAnswer() {
   const finalAnswer = document.getElementById('finalAnswer').value.trim();
   const color = localStorage.getItem('colorSquare');
-  const correctAnswer = color === 'red' ? 'Red' : 'Blue'; // Respuestas finales distintas según el equipo
+  const correctAnswer = color === 'red' ? 'Education inspires change and empowers minds to achieve' : 'Knowledge opens doors and fosters growth throughout life'; // Respuestas finales distintas según el equipo
 
   const colorSquare = document.getElementById('colorSquare');
   
