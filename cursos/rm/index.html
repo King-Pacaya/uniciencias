@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!---Meta--->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!---Page Icon---> 
+  <link rel="shortcut icon" href="../../multimedia/favicon.png">
+  <!--CSS Documents-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!--Fonts-->
+  <style>
+    * {
+      font-family: 'DM Sans', sans-serif;
+    }
+    #menu {
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+    }
+    #menu.open {
+      transform: translateX(0);
+    }
+    .active-tab {
+      font-weight: bold;
+      background-color: rgb(225 29 72 / var(--tw-bg-opacity, 1));
+      color: white;
+    }
+  </style>
+  <title>Título</title>
+</head>
+<body class="bg-white text-rose-600">
+  <!-- Navigation Bar -->
+  <div class="flex justify-between items-center p-4">
+    <button id="menuButton" class="text-rose-600 text-2xl">
+      <i class="fas fa-bars"></i>
+    </button>
+    <button id="resizeButton" class="text-rose-600 text-2xl">
+      <i class="fas fa-expand"></i>
+    </button>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div id="menu" class="fixed top-0 left-0 w-64 h-full bg-rose-600 shadow-lg p-4 text-white">
+    <div class="flex justify-center items-center mb-4">
+      <h2 class="text-lg font-bold">UNIDAD 1</h2>
+      <button id="closeMenuButton" class="absolute right-4 text-white text-2xl">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <h2 class="text-lg font-bold mb-4">PARTE I</h2>
+    <button id="btn-tab1" class="block w-full text-left mb-2 active-tab" onclick="showTab('content-tab1', 'btn-tab1')">Tab 1</button>
+    <button id="btn-tab2" class="block w-full text-left mb-2" onclick="showTab('content-tab2', 'btn-tab2')">Tab 2</button>
+    <h2 class="text-lg font-bold mt-6 mb-4">PARTE II</h2>
+    <button id="btn-tab3" class="block w-full text-left mb-2" onclick="showTab('content-tab3', 'btn-tab3')">Tab 3</button>
+    <h2 class="text-lg font-bold mt-6 mb-4">PARTE III</h2>
+    <button id="btn-tab4" class="block w-full text-left mb-2" onclick="showTab('content-tab4', 'btn-tab4')">Tab 4</button>
+    <h2 class="text-lg font-bold mt-6 mb-4">PARTE IV</h2>
+    <button id="btn-tab5" class="block w-full text-left mb-2" onclick="showTab('content-tab5', 'btn-tab5')">Tab 5</button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div id="content" class="p-4">
+    <div id="content-tab1" class="tab">Tab 1</div>
+    <div id="content-tab2" class="tab hidden">Tab 2</div>
+    <div id="content-tab3" class="tab hidden">Tab 3</div>
+    <div id="content-tab4" class="tab hidden">Tab 4</div>
+    <div id="content-tab5" class="tab hidden">Tab 5</div>
+  </div>
+
+  <!-- Home Button -->
+  <button id="homeButton" class="fixed bottom-4 right-4 bg-rose-600 p-3 rounded-full shadow-lg">
+    <i class="fas fa-home text-white text-xl"></i>
+  </button>
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

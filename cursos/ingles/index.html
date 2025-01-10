@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!---Meta--->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!---Page Icon--> 
+  <link rel="shortcut icon" href="../../multimedia/favicon.png">
+  <!--CSS Documents-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!--Fonts-->
+  <style>
+    * {
+      font-family: 'DM Sans', sans-serif;
+    }
+    #menu {
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+    }
+    #menu.open {
+      transform: translateX(0);
+    }
+    .active-tab {
+      font-weight: bold;
+      background-color: rgb(20 83 45 / var(--tw-bg-opacity, 1));
+      color: white;
+    }
+    /* Botones fijos */
+    #menuButton,
+    #resizeButton {
+      position: fixed;
+      top: 16px;
+      z-index: 10;
+    }
+
+    #resizeButton {
+      right: 16px;
+    }
+
+    #homeButton {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      background-color: #004d40;
+      padding: 12px;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+  </style>
+  <title>Inglés</title>
+</head>
+<body class="bg-white text-green-700">
+  <!-- Navigation Bar -->
+  <div class="flex justify-between items-center p-4">
+    <button id="menuButton" class="text-green-700 text-2xl z-10">
+      <i class="fas fa-bars"></i>
+    </button>
+    <button id="resizeButton" class="text-green-700 text-2xl">
+      <i class="fas fa-expand"></i>
+    </button>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div id="menu" class="fixed top-0 left-0 w-64 h-full bg-green-800 shadow-lg p-4 text-white z-10">
+    <div class="flex justify-center items-center mb-4">
+      <h2 class="text-lg font-bold">UNIDAD 1</h2>
+      <button id="closeMenuButton" class="absolute right-4 text-white text-2xl">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <h2 class="text-lg font-bold mb-4">PARTE I</h2>
+    <button id="tab-skimming" class="block w-full text-left mb-2 active-tab" onclick="showTab('skimming')">Skimming</button>
+    <button id="tab-scanning" class="block w-full text-left mb-2" onclick="showTab('scanning')">Scanning</button>
+    <h2 class="text-lg font-bold mt-6 mb-4">PARTE II</h2>
+    <button id="tab-diagnostico" class="block w-full text-left mb-2" onclick="showTab('diagnostico')">Diagnóstico</button>
+    <h2 class="text-lg font-bold mt-6 mb-4">PARTE III</h2>
+    <button id="tab-ejercicios" class="block w-full text-left mb-2" onclick="showTab('ejercicios')">Ejercicios</button>
+    <h2 class="text-lg font-bold mt-6 mb-4">PARTE IV</h2>
+    <button id="tab-batalla" class="block w-full text-left mb-2" onclick="showTab('batalla')">Batalla</button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div id="content" class="p-4">
+    <!-- Tab Skimming-->
+    <div id="skimming" class="tab">
+      <h3 class="text-2xl font-bold text-green-700 mb-2 text-center">Skimming</h3>
+      <p class="text-black mb-6 text-justify">
+        Skimming es una técnica de lectura que consiste en pasar rápidamente los ojos sobre un texto para captar las ideas principales y su estructura general, sin detenerse en los detalles. Es útil cuando necesitas obtener una visión general del contenido en poco tiempo. Por ejemplo, al hojear un periódico para encontrar noticias que te interesen, leer títulos y subtítulos de un artículo, o revisar un libro antes de decidir si lo compras.
+      </p>
+      <img src="../../multimedia/skimming.jpg" alt="Ejemplo de Skimming" class="w-full h-auto mb-6 rounded-lg">
+    </div>
+
+    <!-- Tab Scanning -->
+    <div id="scanning" class="tab hidden">
+      <h3 class="text-2xl font-bold text-green-700 mb-2 text-center">Scanning</h3>
+      <p class="text-black mb-6 text-justify">
+        Scanning, por otro lado, es una técnica que implica buscar información específica en un texto, como nombres, fechas, cifras o palabras clave. En lugar de leer cada palabra, tus ojos se mueven directamente hacia los detalles que necesitas encontrar. Esta técnica es muy útil para buscar datos en una tabla, encontrar horarios en un itinerario o responder preguntas concretas en un examen basado en un texto.
+      </p>
+      <img src="../../multimedia/scanning.jpg" alt="Ejemplo de Scanning" class="w-full h-auto mb-6 rounded-lg">
+    </div>
+
+    <!-- Tab Diagnóstico -->
+    <div id="diagnostico" class="tab hidden z-0">
+      <!-- Modal de inicio del diagnóstico -->
+      <div id="diagnosticoModal" class="fixed inset-0 bg-white flex justify-center items-center hidden">
+        <div class="bg-white p-8 text-center w-80">
+          <h2 class="text-xl font-bold mb-4">EMPEZAR DIAGNÓSTICO</h2>
+          <p class="text-lg mb-6">TIEMPO: <span id="countdown" class="text-green-700">15:00</span></p>
+          <button id="startDiagnostic" class="bg-green-700 text-white py-2 px-4 rounded">Comenzar</button>
+        </div>
+      </div>
+
+      <h2 class="fixed w-full mx-auto text-center text-lg font-bold top-4 -z-10"><span id="timerDisplay" class="text-green-700">15:00</span></h2>
+
+      <!-- Pregunta 1 -->
+      <div id="question1" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="1"></p>
+        <p class="text-black mb-4">The teacher was very pleased with her student’s ______ in the English exam.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          anger
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          performance
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          confusion
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          hesitation
+        </div>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div id="question2" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="2"></p>
+        <p class="text-black mb-4">After hearing the loud noise, the cat ______ under the couch.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          danced
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          ran
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          hid
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          ignored
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div id="question3" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="3"></p>
+        <p class="text-black mb-4">She wasn’t feeling well, so she decided to ______ from work that day.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          resign
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          postpone
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          recover
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          stay
+        </div>
+      </div>
+
+      <!-- Pregunta 4 -->
+      <div id="question4" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="4"></p>
+        <p class="text-black mb-4">The report was full of ______, making it difficult to understand.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          clarity
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          errors
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          details
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          questions
+        </div>
+      </div>
+
+      <!-- Pregunta 5 -->
+      <div id="question5" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="5"></p>
+        <p class="text-black mb-4">The team is ______ to finish the project before the deadline.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          planning
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          attempting
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          forcing
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          hesitating
+        </div>
+      </div>
+
+      <!-- Pregunta 6 -->
+      <div id="question6" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="6"></p>
+        <p class="text-black mb-4">The children enjoyed playing outside in the ______ weather.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          cold
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          sunny
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          rainy
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          stormy
+        </div>
+      </div>
+
+      <!-- Pregunta 7 -->
+      <div id="question7" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="7"></p>
+        <p class="text-black mb-4">The company’s decision to ______ the new technology was a success.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          ignore
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          abandon
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          embrace
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          resist
+        </div>
+      </div>
+
+      <!-- Pregunta 8 -->
+      <div id="question8" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="8"></p>
+        <p class="text-lg" data-order="6">What is the main purpose of the following passage?</p>
+        <p class="text-black mb-4 text-pretty">The benefits of daily exercise are numerous. It improves physical health, boosts mental clarity, and helps in maintaining a good mood. Regular exercise can also prevent chronic diseases such as heart disease and diabetes.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To explain how to perform exercises
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          To discuss the importance of daily exercise
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To describe different types of exercises
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To explain the dangers of not exercising
+        </div>
+      </div>
+
+      <!-- Pregunta 9 -->
+      <div id="question9" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="9"></p>
+        <p class="text-lg" data-order="6">Which of the following best summarizes the passage?</p>
+        <p class="text-black mb-4 text-pretty">Many people struggle to balance their work and personal life. It’s important to manage time well, set priorities, and not forget to take time for oneself. Finding a balance between these two aspects can greatly improve your quality of life.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Balancing work and personal life is impossible
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          Work-life balance is essential for well-being
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Time management is not important
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Work should always come first
+        </div>
+      </div>
+
+      <!-- Pregunta 10 -->
+      <div id="question10" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="10"></p>
+        <p class="text-lg" data-order="6">What is the focus of this article?</p>
+        <p class="text-black mb-4 text-pretty">In a rapidly changing world, learning new skills has become essential for career growth. Professionals who adapt to new technologies and trends are more likely to succeed in the job market.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          Learning skills for career success
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          The importance of new technologies
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          The effects of a changing world
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Job market trends
+        </div>
+      </div>
+
+      <!-- Pregunta 11 -->
+      <div id="question11" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="11"></p>
+        <p class="text-lg" data-order="6">What is the main idea of the passage?</p>
+        <p class="text-black mb-4 text-pretty">Technology has greatly impacted the way we communicate. With the advent of smartphones and social media, people are now able to stay connected with friends, family, and coworkers from anywhere in the world.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Technology is harmful to communication
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          Technology has changed how people communicate
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Communication was better before smartphones
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Social media is the most important communication tool
+        </div>
+      </div>
+
+      <!-- Pregunta 12 -->
+      <div id="question12" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="12"></p>
+        <p class="text-lg" data-order="6">Which of these sentences summarizes the passage?</p>
+        <p class="text-black mb-4 text-pretty">Climate change is one of the most urgent challenges we face today. It affects weather patterns, sea levels, and ecosystems across the globe. Immediate action is needed to prevent further damage.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Climate change is a minor issue
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          The world has already adapted to climate change
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          Climate change is causing significant global problems
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Climate change only affects the oceans
+        </div>
+      </div>
+
+      <!-- Pregunta 13 -->
+      <div id="question13" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="13"></p>
+        <p class="text-lg" data-order="6">What is the passage mainly about?</p>
+        <p class="text-black mb-4 text-pretty">This novel explores themes of loss, love, and redemption. The protagonist, after a tragic event, goes on a journey to find peace and understanding with his past.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          A journey through physical landscapes
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          The protagonist’s search for meaning
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          The significance of historical events
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          A tragic love story
+        </div>
+      </div>
+
+      <!-- Pregunta 14 -->
+      <div id="question14" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="14"></p>
+        <p class="text-lg" data-order="6">What is the passage’s main message?</p>
+        <p class="text-black mb-4 text-pretty">The benefits of meditation include stress reduction, improved concentration, and better emotional regulation. Many people practice meditation to achieve inner peace and mindfulness in their daily lives.</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Meditation is difficult to learn
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          Meditation is a practice with many benefits
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Meditation is only for certain people
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Meditation has no effect on health
+        </div>
+      </div>
+
+      <!-- Pregunta 15 -->
+      <div id="question15" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="15"></p>
+        <p class="text-black mb-4">Our store is located at 123 Main Street. We open at 9 AM and close at 6 PM from Monday to Friday. On weekends, we open from 10 AM to 4 PM. For more information, please call us at 555-1234.</p>
+        <p class="mb-4">Where is the store located?</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          555 Main Street
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          123 Main Street
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          10 Park Avenue
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          777 Oak Street
+        </div>
+      </div>
+
+      <!-- Pregunta 16 -->
+      <div id="question16" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="16"></p>
+        <p class="text-black mb-4">The Amazon River is the second-longest river in the world, flowing for approximately 4,345 miles. It passes through several countries, including Brazil, Peru, and Colombia, and empties into the Atlantic Ocean.</p>
+        <p class="mb-4">Which of these countries does the Amazon River pass through?</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Chile
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          Brazil
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Argentina
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Mexico
+        </div>
+      </div>
+
+      <!-- Pregunta 17 -->
+      <div id="question17" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="17"></p>
+        <p class="text-black mb-4">The Eiffel Tower in Paris was completed in 1889 and stands 324 meters tall. It was initially criticized by many, but today it is one of the most visited monuments in the world, attracting millions of tourists every year.</p>
+        <p class="mb-4">When was the Eiffel Tower completed?</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          1879
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          1885
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          1889
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          1901
+        </div>
+      </div>
+
+      <!-- Pregunta 18 -->
+      <div id="question18" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="18"></p>
+        <p class="text-black mb-4">The museum opens every day except Mondays. Visitors can enjoy free admission on the first Sunday of every month. The museum is closed during major holidays like Christmas and New Year's Day. It offers a variety of exhibits ranging from ancient history to contemporary art.</p>
+        <p class="mb-4">When can visitors enter the museum for free?</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          On weekends
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          On the first Sunday of each month
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          On public holidays
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          Only during Christmas
+        </div>
+      </div>
+
+      <!-- Pregunta 19 -->
+      <div id="question19" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="19"></p>
+        <p class="text-black mb-4">The United Nations (UN) was founded in 1945 after World War II to promote international cooperation. Its main goals are to maintain peace and security, develop friendly relations among nations, and solve international problems. The headquarters of the UN is located in New York City, USA.</p>
+        <p class="mb-4">What is one of the main goals of the United Nations?</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To regulate national elections
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          To promote international cooperation
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To manage global financial markets
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To establish global governments
+        </div>
+      </div>
+
+      <!-- Pregunta 20 -->
+      <div id="question20" class="question mb-6 -z-10">
+        <p class="text-lg font-semibold question-title" data-order="20"></p>
+        <p class="text-black mb-4">The Great Wall of China is over 13,000 miles long and was constructed over several centuries. It was originally built as a defense against invaders, but today it is one of the most famous historical landmarks in the world. The wall’s construction involved the labor of thousands of workers, many of whom were soldiers and prisoners.</p>
+        <p class="mb-4">What was the primary purpose of the Great Wall of China?</p>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To attract tourists
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="true" onclick="selectAnswer(this)">
+          To defend against invaders
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To serve as a trade route
+        </div>
+        <div class="answer border-2 p-3 mb-2 capitalize" data-correct="false" onclick="selectAnswer(this)">
+          To monitor agricultural production
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Ejercicios -->
+    <div id="ejercicios" class="tab hidden"></div>
+
+    <!-- Tab Batalla -->
+    <div id="batalla" class="tab hidden">
+      <div id="colorSquare" class="fixed top-4 left-1/4 w-2/4 h-7 rounded flex justify-center items-center text-white"></div>
+
+      <!-- Sección de preguntas -->
+      <div id="questionSection" class="mt-10">
+        <div id="questionContainer">
+          <!-- Aquí se mostrará la fase, el texto, la pregunta, las alternativas, el input y el botón -->
+        </div>
+      </div>
+
+      <div id="hintContainer" class="mt-4 hidden">
+        <p id="hintText" class="text-lg font-semibold"></p>
+      </div>
+
+      <input type="text" id="answerInput" class="mt-4 p-2 border border-gray-300 rounded w-full outline-none" placeholder="Escribe la pista aquí">
+      <button id="submitAnswer" class="mt-2 p-2 w-full text-white rounded">Enviar respuesta</button>
+
+      <div id="finalPhase" class="hidden">
+        <div class="question mt-6 mb-6">
+          <p class="text-2xl font-semibold question-title">Fase Final</p>
+          <div id="allHints" class="mb-4"></div>
+          <input type="text" id="finalAnswer" class="mt-4 p-2 border border-gray-300 rounded w-full outline-none text-black" placeholder="Escribe la frase correcta">
+          <button id="finalSubmit" class="mt-2 p-2 bg-green-700 w-full text-white rounded">Enviar respuesta final</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Home Button -->
+  <button id="homeButton" class="bg-green-700 p-3 rounded-full shadow-lg">
+    <i class="fas fa-home text-white text-xl"></i>
+  </button>
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!---Meta--->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!---Page Icon--->
+  <link rel="shortcut icon" href="../../multimedia/favicon.png">
+  <!--CSS Documents-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!--Fonts-->
+  <style>
+    * {
+      font-family: 'DM Sans', sans-serif;
+    }
+    /* El menú inicia fuera de la vista (desplazado hacia la izquierda) */
+    #menu {
+      transition: transform 0.3s ease;
+      transform: translateX(-100%);
+      z-index: 999;
+      width: 100%; /* para que ocupe el w-full al abrirse */
+    }
+    /* Cuando está en estado "open", se desplaza a la posición original (0) */
+    #menu.open {
+      transform: translateX(0);
+    }
+    /* Estilo para el tab activo */
+    .active-tab {
+      font-weight: bold;
+      background-color: rgb(133 77 14 / var(--tw-bg-opacity, 1));
+      color: white;
+    }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  /* La transición ya está incluida con Tailwind en el HTML */
+}
+
+.hide {
+  transform: translateY(-100%);
+}
+
+  </style>
+  <title>Economía</title>
+</head>
+<body class="bg-white text-yellow-600">
+  <!-- Barra de Navegación Superior -->
+  <div id="navbar" class="navbar flex justify-between items-center p-4 transition-transform duration-300">
+    <!-- Botón para abrir menú -->
+    <button id="menuButton" class="text-yellow-600 text-2xl">
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Botón para pantalla completa -->
+    <button id="resizeButton" class="text-yellow-600 text-2xl">
+      <i class="fas fa-expand"></i>
+    </button>
+  </div>
+
+  <!-- MENÚ LATERAL (desplegado a w-full) -->
+  <div id="menu" class="fixed top-0 left-0 h-full bg-yellow-600 shadow-lg p-4 text-white overflow-auto">
+    <!-- Encabezado y botón de cerrar -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-bold">UNIDAD 1</h2>
+      <button id="closeMenuButton" class="text-white text-2xl">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Dropdown de MICROECONOMÍA -->
+    <div class="mb-6">
+      <!-- Botón principal que abre o cierra el dropdown -->
+      <button class="flex items-center w-full text-left p-2 hover:bg-yellow-700" onclick="toggleDropdown('microDropdown')">
+        <i class="fas fa-chevron-down mr-2"></i>
+        <span class="text-xl font-bold">Microeconomía</span>
+      </button>
+      <!-- Contenido del dropdown: temas y subtemas -->
+      <div id="microDropdown" class="hidden ml-4 mt-2">
+        <!-- 1. Introducción a la economía -->
+        <p class="font-semibold mt-2 text-center text-lg uppercase">Introducción a la economía:</p>
+        <button id="tabMicro1-btn" class="block w-full text-left mt-1 text-lg active-tab" onclick="showTab('tabMicro1')">
+          <i class="fa-solid fa-info"></i> Introducción a la economía
+        </button>
+        <button id="tabMicro2-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro2')">
+          <i class="fa-solid fa-info"></i> La escasez
+        </button>
+        <button id="tabMicro3-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro3')">
+          <i class="fa-solid fa-info"></i> Escasez y rivalidad
+        </button>
+        <button id="tabMicro4-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro4')">
+          <i class="fa-solid fa-info"></i> Los cuatro factores de producción
+        </button>
+        <button id="tabMicro5-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro5')">
+          <i class="fa-solid fa-info"></i> Modelos económicos
+        </button>
+        <button id="tabMicro6-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro6')">
+          <i class="fa-solid fa-info"></i> Proposiciones normativas y positivas
+        </button>
+        <button id="tabMicro7-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro7')">
+          <i class="fa-regular fa-file-lines"></i> Resumen: escasez, decisiones y costo de oportunidad
+        </button>
+        
+        <!-- 2. Los sistemas económicos -->
+        <p class="font-semibold mt-4 text-center text-lg uppercase">Los sistemas económicos:</p>
+        <button id="tabMicro8-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro8')">
+          <i class="fa-solid fa-info"></i> Derechos de propiedad y sistema de mercado
+        </button>
+        <button id="tabMicro9-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro9')">
+          <i class="fa-solid fa-info"></i> Los mercados y los derechos de propiedad
+        </button>
+        <button id="tabMicro10-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro10')">
+          <i class="fa-regular fa-file-lines"></i> Resumen: los sistemas económicos, el papel de los incentivos y el modelo de flujo circular
+        </button>
+
+        <!-- 3. La frontera de posibilidades de producción -->
+        <p class="font-semibold mt-4 text-center text-lg uppercase">La frontera de posibilidades de producción:</p>
+        <button id="tabMicro11-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro11')">
+          <i class="fa-solid fa-info"></i> La curva de posibilidades de producción
+        </button>
+        <button id="tabMicro12-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro12')">
+          <i class="fa-solid fa-info"></i> El costo de oportunidad
+        </button>
+        <button id="tabMicro13-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro13')">
+          <i class="fa-solid fa-info"></i> Costo de oportunidad creciente
+        </button>
+
+        <!-- 4. La ventaja comparativa y los términos del comercio -->
+        <p class="font-semibold mt-4 text-center text-lg uppercase">La ventaja comparativa y los términos del comercio:</p>
+        <button id="tabMicro17-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro17')">
+          <i class="fa-solid fa-info"></i> Ventaja comparativa, especialización y ganancias
+        </button>
+        <button id="tabMicro18-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMicro18')">
+          <i class="fa-solid fa-info"></i> Ventaja comparativa y ventaja absoluta
+        </button>
+      </div>
+    </div>
+    <!-- Fin Dropdown Microeconomía -->
+
+    <!-- Dropdown de MACROECONOMÍA -->
+    <div>
+      <button 
+        class="flex items-center w-full text-left p-2 hover:bg-yellow-700"
+        onclick="toggleDropdown('macroDropdown')"
+      >
+        <i class="fas fa-chevron-down mr-2"></i>
+        <span class="text-xl font-bold">Macroeconomía</span>
+      </button>
+      <div id="macroDropdown" class="hidden ml-4 mt-2">
+        <!-- 2. El PIB y el flujo circular -->
+        <p class="font-semibold mt-4 text-lg uppercase">El PIB y el flujo circular de ingresos y gastos:</p>
+        <button id="tabMacro3-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMacro3')">
+          <i class="fa-solid fa-info"></i> El flujo circular del ingreso y del gasto
+        </button>
+        <button id="tabMacro4-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMacro4')">
+          <i class="fa-solid fa-info"></i> Análisis del PIB
+        </button>
+        <button id="tabMacro5-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMacro5')">
+          <i class="fa-solid fa-info"></i> Contribuciones finales e intermedias en el PIB
+        </button>
+
+        <!-- 3. Componentes del PIB -->
+        <p class="font-semibold mt-4 text-lg uppercase">Componentes del producto interno bruto (PIB):</p>
+        <button id="tabMacro6-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMacro6')">
+          <i class="fa-solid fa-info"></i> Inversión y consumo
+        </button>
+        <button id="tabMacro7-btn" class="block w-full text-left mt-1 text-lg" onclick="showTab('tabMacro7')">
+          <i class="fa-solid fa-info"></i> PIB desde el enfoque del gasto y del ingreso
+        </button>
+      </div>
+    </div>
+    <!-- Fin Dropdown Macroeconomía -->
+  </div>
+  <!-- Fin del Sidebar Menu -->
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div id="content" class="p-4">
+    <!-- Aquí puedes ir agregando los div de cada tab de Micro y Macro -->
+    <!-- MICROECONOMÍA TABS -->
+    <div id="tabMicro1" class="tab">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Introducción a la Economía: Una Visión General</h3>
+      <p class="text-black mb-6 text-justify">
+        A mediados del siglo XVIII, un filósofo escocés llamado 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Adam Smith</span>
+        </span> 
+        sentó las bases de lo que hoy conocemos como ciencia económica. Su obra más célebre, 
+        <em>La riqueza de las naciones</em> (publicada en 1776), incluye la famosa metáfora de la “mano invisible”, según la cual, al perseguir cada individuo su propio interés, se beneficia de forma involuntaria el conjunto de la sociedad. Smith no sostenía que el comportamiento egoísta fuera siempre bueno, sino que, en muchos casos, la búsqueda racional del provecho personal puede fomentar la innovación, la inversión y la productividad, incrementando en última instancia el bienestar colectivo.
+      </p>
+      <img src="../../multimedia/adam-smith.jpeg" class="w-full h-auto mb-6 rounded-lg">
+      <p class="text-black mb-6 text-justify">
+        Este planteamiento subraya la tensión permanente entre dos grandes áreas de estudio económico: la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">microeconomía</span>
+        </span> 
+        y la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">macroeconomía</span>
+        </span>. 
+        La primera se centra en los actores individuales (empresas, familias o personas), observando cómo asignan recursos escasos como el tiempo, el dinero o la mano de obra y cómo sus decisiones influyen en los precios y la dinámica de los mercados. La segunda, por su parte, examina los fenómenos económicos a gran escala, evaluando el desempeño de naciones enteras a través de indicadores agregados y el impacto de las políticas gubernamentales, por ejemplo, el efecto de un aumento de impuestos o la desregulación de ciertos sectores en el crecimiento económico y la estabilidad financiera.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Con el paso del tiempo, se ha buscado dar a la economía un carácter cada vez más matemático y riguroso. Se asume que las personas suelen tomar decisiones racionales y orientadas a maximizar su propio beneficio, y a partir de esas simplificaciones se construyen modelos formales. Esto permite extraer conclusiones lógicas y analizar tendencias de forma cuantitativa. Sin embargo, la realidad humana es mucho más compleja, y es importante recordar que la base de estos modelos descansa en supuestos que no siempre se ajustan a la conducta real de la gente. Especialmente en 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">macroeconomía</span>
+        </span>, 
+        donde intervienen millones de actores interactuando de formas impredecibles, las conclusiones derivadas de los modelos deben manejarse con cautela.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Resulta útil evocar aquí dos citas que ilustran la naturaleza incierta de la economía. 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Alfred Knp</span>
+        </span> 
+        señalaba, con cierto ingenio, que el economista es alguien que “enuncia lo obvio con términos incomprensibles”, aludiendo a la complejidad técnica que a menudo acompaña los análisis económicos. Por su parte, 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Lawrence J. Peter</span>
+        </span> 
+        afirmaba que un economista es “un experto que sabrá mañana por qué lo que predijo ayer no sucedió hoy”, reflejando las dificultades inherentes a vaticinar con exactitud el comportamiento de los mercados y las sociedades. A fin de cuentas, la economía se interesa tanto por la comprensión del comportamiento humano como por la aplicación de modelos formales. Mantener una mirada crítica y una perspectiva amplia resulta esencial para navegar en esta disciplina apasionante y en constante evolución.
+      </p>
+    </div>
+    <div id="tabMicro2" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">La escasez</h3>
+      <p class="text-black mb-6 text-justify">
+        La economía parte esencialmente de la noción de <strong>escasez</strong>: si los bienes, servicios o recursos fuesen infinitos, no existiría la necesidad de decidir cómo se distribuyen ni de establecer qué costos deben cubrirse para obtenerlos. De ahí surge el estudio de cómo la sociedad organiza y valora lo que es limitado. <br><br>Un recurso de libre uso es aquel que, en cierto contexto, puede considerarse tan abundante que no se compite por él; sin embargo, cuando la demanda supera su disponibilidad, pasa a verse como un bien <em>escaso</em>. El 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">caviar</span>
+        </span>, por ejemplo, ilustra perfectamente este concepto al ser costoso y difícil de obtener, mientras que la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">mano de obra</span>
+        </span> también muestra su condición de recurso finito, ya que las personas solo pueden trabajar un número determinado de horas y suelen requerir algo a cambio de su esfuerzo. <br><br>Por otro lado, la belleza de un paisaje o la cercanía a un cuerpo de agua pueden verse inicialmente como bienes libres, pero con el paso del tiempo y el aumento de la demanda, se convierten en recursos escasos. Incluso el aire, a menudo tratado como un recurso <em>inagotable</em>, puede llegar a <strong>escasear</strong> en contextos extremos, como el de una 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">estación espacial</span>
+        </span> o una colonia extraterrestre. <br><br>
+        
+        En conjunto, la economía se dedica a analizar cómo se asignan estos recursos escasos y qué implicaciones tienen los distintos métodos de distribución. A medida que se exploran temas de micro y macroeconomía, se profundiza en los <em>incentivos</em> que conducen a la gente a producir, intercambiar y consumir, y en los efectos que surgen de estas decisiones sobre el bienestar general.
+      </p>
+      <img src="../../multimedia/la-escasez.jpg" class="w-full h-auto mb-6 rounded-lg">
+    </div>
+    <div id="tabMicro3" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Escasez y rivalidad</h3>
+      <p class="text-black mb-6 text-justify">
+        La economía se fundamenta en el concepto de la <em>escasez</em>, que alude a la existencia de un recurso en cantidad limitada frente a una demanda que potencialmente podría ser ilimitada. Así, bienes como el petróleo, la tierra o la vivienda se consideran <strong>escasos</strong> porque no hay suficiente para satisfacer el deseo de todos, especialmente si su costo fuera nulo. El estudio económico se centra precisamente en averiguar cómo asignar esos recursos cuando existe competencia por ellos. <br><br>
+        Muy relacionada con la <em>escasez</em> está la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">rivalidad</span>
+        </span>, término que describe la situación en la que el uso de un bien por parte de una persona impide o reduce el acceso al mismo bien para otras personas. Un clásico ejemplo es un pastel: si alguien se come todo el pastel, se agota la posibilidad de que otros lo disfruten. <br><br>
+        Los bienes pueden disponerse a lo largo de un <em>espectro</em> que va desde los totalmente “rivales” hasta los “no rivales”. Un bien es completamente <strong>rival</strong> cuando resulta imposible que varios lo usen al mismo tiempo (como un martillo, un departamento en alquiler o un pastel pequeño para muchas personas). Por el contrario, un bien se acerca a la <strong>no rivalidad</strong> cuando, al usarlo, no se limita en lo absoluto el uso que puedan hacer los demás, como el aire que respiramos libremente. Sin embargo, en contextos especiales, como un cuarto sellado con oxígeno limitado, incluso el aire se puede volver un bien <strong>rival</strong>. <br><br>
+        Las carreteras brindan un ejemplo dinámico: en horas pico, el uso masivo genera congestión y, por ende, afecta la circulación de los demás automóviles, volviéndose un recurso <strong>rival</strong>; mientras que, de madrugada, las mismas vías funcionan casi como un bien <strong>no rival</strong>, pues hay espacio de sobra para todos los conductores. Así, tanto la <em>escasez</em> como la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">rivalidad</span>
+        </span> constituyen pilares esenciales para entender cómo y por qué la economía estudia la asignación de los recursos en la sociedad. <br><br>
+      </p>
+    </div>
+    <div id="tabMicro4" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Los cuatro factores de producción</h3>
+      <p class="text-black mb-6 text-justify">
+        <strong>Los cuatro factores de producción (tierra, trabajo, capital y habilidades empresariales)</strong> son esenciales para comprender cómo se generan los bienes y servicios que utilizamos a diario. La <strong>tierra</strong> se entiende aquí no solo como el terreno físico, sino también como todo recurso natural, que incluye agua, aire y diversas fuentes de energía.<br><br>
+        El <strong>trabajo</strong> alude a la labor humana necesaria para sembrar, cosechar, ensamblar o fabricar. Sin la participación de las personas, sería imposible producir bienes como alimentos, ropa o maquinaria.<br><br>
+        El <strong>capital</strong>, en el contexto económico, se refiere a las herramientas, la maquinaria o los edificios dedicados a la producción de más bienes. A diferencia de su uso cotidiano, el capital económico no se enfoca en el dinero o los activos financieros, sino en aquellos productos que ayudan a crear otros productos.<br><br>
+        Las <strong>habilidades empresariales</strong> constituyen el factor que reúne de manera eficiente tierra, trabajo y capital para sacar adelante la producción. En algunos casos, estas habilidades se describen como 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">“tecnología”</span>
+        </span>, entendida como el conjunto de conocimientos y métodos organizativos, más que como dispositivos electrónicos o software.<br><br>
+        Por último, es útil distinguir entre la producción de <em>bienes de capital</em>, cuyo objetivo es permitir la elaboración de más bienes (por ejemplo, una fábrica o la maquinaria dentro de ella), y la producción de <em>bienes de consumo</em>, destinados al uso o disfrute inmediato de las personas. Dado que los recursos son limitados, la decisión entre destinar más recursos a bienes de consumo o a bienes de capital constituye un equilibrio fundamental en cualquier economía.
+      </p>
+    </div>
+    <div id="tabMicro5" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Descifrando la economía a través de modelos simplificados</h3>
+      <p class="text-black mb-6 text-justify">
+        La economía es un campo inmensamente complejo, compuesto por miles de millones de actores y relaciones. Para comprender tal complejidad, los economistas han adoptado la estrategia de crear <strong>modelos simplificados</strong>. Inspirándose en otras disciplinas como la química y la biología, donde se hacen suposiciones simplificadas para entender sistemas complicados, la economía hace lo propio. Por ejemplo, en química se usa la ley del gas ideal para relacionar variables como presión y temperatura, evitando el caos de analizar cada molécula individual.
+        <br><br>
+        De manera similar, en biología se utilizan organismos modelo como las <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">mosquitas de la fruta</span>
+        </span> o los ratones para simplificar estudios que serían éticamente inviables en humanos. Estos enfoques permiten generar modelos predictivos y testear hipótesis antes de pasar a escenarios reales.
+        <br><br>
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Al igual que en química y biología, los economistas suponen ciertas condiciones como la <strong>racionalidad</strong> de los agentes económicos y el acceso perfecto a la información. Aunque sabemos que en la realidad estas suposiciones no siempre se cumplen, facilitan la creación de modelos como la <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>precio de equilibrio</em></span>
+        </span>, la frontera de posibilidades de producción y otros conceptos fundamentales. Estas construcciones, basadas en la noción de <em>ceteris paribus</em>, permiten aislar variables para estudiar sus efectos sin la interferencia del complejo entramado de factores reales.
+        <br><br>
+      </p>
+      <p class="text-black mb-6 text-justify">
+        A pesar de su utilidad, es crucial abordar los modelos económicos con escepticismo, reconociendo que son aproximaciones y no reflejos exactos de la realidad. Los modelos pueden volverse peligrosos si se aceptan sin cuestionar sus <strong>suposiciones subyacentes</strong>. De hecho, muchos premios Nobel en economía se han concedido precisamente a aquellos que han desafiado estos supuestos, desarrollando nuevos enfoques más robustos y realistas.
+        <br><br>
+        A diferencia de otras ciencias, en economía no es posible realizar experimentos controlados a gran escala para validar teorías, lo que sitúa esta disciplina entre las ciencias sociales y las ciencias naturales. Sin embargo, mediante suposiciones controladas y la construcción de modelos, los economistas logran aproximarse a la comprensión de fenómenos complejos del mundo real, mostrando una vez más la importancia y el desafío de estudiar la economía.
+      </p>
+    </div>
+    <div id="tabMicro6" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Diferenciando afirmaciones normativas y positivas</h3>
+      <p class="text-black mb-6 text-justify">
+        Las <strong>afirmaciones normativas</strong> y <strong>afirmaciones positivas</strong> son términos fundamentales tanto en economía como en filosofía. Una <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>afirmación normativa</em></span>
+        </span> se basa en opiniones, ética o moral, y expresa lo que alguien <em>cree que debería ser</em>. En contraste, una <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>afirmación positiva</em></span>
+        </span> es una proposición que, aunque no necesariamente sea cierta, puede ser comprobada mediante la evidencia o la experimentación.
+        <br><br>
+        Es posible clasificar diversas afirmaciones sobre la economía como normativas o positivas. Por ejemplo, la declaración “pagar a personas que no trabajan cuando pueden trabajar no es <em>justo</em> y está <em>mal</em>” es claramente normativa, pues refleja una opinión moral que no puede demostrarse científicamente. Por otro lado, afirmaciones como “los programas de asistencia social reducen el incentivo para que la gente trabaje” pueden ser verificadas mediante estudios comparativos o encuestas, por lo que se consideran <strong>positivas</strong>.
+        <br><br>
+        Otras declaraciones aparentemente opinativas también son comprobables. Por ejemplo, “aumentar los impuestos a los ricos para pagar los programas de gobierno hace crecer la economía” y “aumentar los impuestos a los ricos disminuye el crecimiento económico” son afirmaciones que se pueden evaluar mediante simulaciones, estudios comparativos e investigaciones empíricas, clasificándose como afirmaciones <em>positivas</em>.
+        <br><br>
+        Un consejo útil para distinguir es que, si una afirmación dice “deberíamos hacer esto” o utiliza términos como <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>justo</em></span>
+        </span> o <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>debería</em></span>
+        </span>, probablemente se trate de una afirmación normativa, ya que expresa una opinión o juicio de valor. En resumen, las afirmaciones normativas no pueden comprobarse científicamente por tratarse de opiniones, mientras que las afirmaciones positivas son susceptibles de verificación a través de la evidencia.
+      </p>
+    </div>
+    <div id="tabMicro7" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Resumen: escasez, decisiones, costo oportunidad</h3>
+      <p class="text-black mb-6 text-justify">
+        Los <em>recursos económicos</em> son escasos. Frente a la escasez, debemos elegir cómo asignar nuestros recursos. La economía es el estudio de cómo lo hacen las sociedades. La microeconomía se centra en cómo los individuos, las familias y las empresas toman esas decisiones.
+        <br><br>
+        <strong>Términos clave</strong>
+        <br><br>
+        <table class="border-collapse w-full mb-6 border-2 border-dashed border-yellow-700">
+          <tr>
+            <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">Término</th>
+            <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">Definición</th>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Escasez</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">El hecho de que hay una cantidad limitada de recursos para satisfacer necesidades ilimitadas.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Recursos económicos</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Cosas que son insumos para la producción de bienes y servicios. Hay cuatro recursos económicos: tierra, trabajo, capital y tecnología. La tecnología también se conoce como iniciativa empresarial.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Tierra</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Los recursos naturales que se utilizan en la producción de bienes y servicios. Algunos ejemplos de tierra son la madera, las materias primas, los peces, el suelo, los minerales y los recursos energéticos.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Trabajo</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">El esfuerzo físico utilizado en la producción de bienes y servicios. Algunos ejemplos son el número de trabajadores y el número de horas trabajadas.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Capital</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Bienes físicos que se producen y se utilizan para producir otros bienes. Ejemplos: maquinaria, tecnología, herramientas como computadoras, fábricas, robots, camiones, trenes y cualquier otro equipo empleado en la producción.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Tecnología</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">(también llamada iniciativa empresarial) La capacidad de combinar los otros factores de producción para elaborar bienes y servicios.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Navaja de Ockham</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">El principio lógico que establece que no debemos hacer más suposiciones que las mínimas necesarias para realizar un análisis. En economía utilizamos la navaja de Ockham al recurrir al supuesto <em>ceteris paribus</em>.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>ceteris paribus</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Locución latina que significa "todo lo demás permanece constante", usada en economía para aislar el efecto de un solo cambio en un escenario dado.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Proposiciones normativas</em></td>
+            <td class="border px-4 py-2 text-black">Proposiciones que describen opiniones o cómo deberían ser las cosas.</td>
+          </tr>
+          <tr>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black font-bold"><em>Proposiciones positivas</em></td>
+            <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Proposiciones de hecho o descripción de cómo es realmente algo.</td>
+          </tr>
+        </table>
+      </p>
+      <p class="text-black mb-6 text-justify">
+        <strong>Recordatorios clave</strong>
+        <br><br>
+        <strong>Escasez y elección</strong><br>
+        La <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>escasez</em></strong></span>
+        </span> es la razón por la que existe la economía: no tendríamos que preocuparnos por cómo se asignan los recursos escasos si esos recursos fueran ilimitados. Es importante señalar que la economía se ocupa principalmente de la <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>escasez</em></strong></span></span> de recursos.
+        <br><br>
+        <strong>Análisis positivo y análisis normativo</strong><br>
+        El análisis económico tiende a centrarse principalmente en el análisis <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>positivo</em></strong></span></span>, es decir, la descripción de fenómenos, hechos y conceptos. Puede resultar tentador utilizar el análisis <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>normativo</em></strong></span></span>, la descripción de cómo deberían ser las cosas. Sin embargo, no debemos interpretar eso como ausencia del pensamiento normativo en la economía, ya que ambos análisis son importantes para crear políticas bien definidas.
+        <br><br>
+        <strong>Modelos económicos</strong><br>
+        Un <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>modelo</em></strong></span></span> es la simplificación de un concepto o proceso para entenderlo mejor, recortando la información hasta centrarse en aspectos clave. Por ejemplo, un mapa es un <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>modelo</em></strong></span></span> de cómo están distribuidas las carreteras. Los economistas usan <strong>modelos</strong> porque no es posible capturar toda la complejidad de la interacción humana de forma sencilla.
+        <br><br>
+        <strong>Errores comunes</strong><br>
+        - No todos los costos son monetarios. El <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>costo de oportunidad</em></strong></span></span> se expresa en términos de a qué cantidad de otro bien, servicio o actividad debemos renunciar para obtener otra cosa.<br>
+        - El cuarto recurso económico, iniciativa empresarial o <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>tecnología</em></strong></span></span>, se refiere a la capacidad de hacer que las cosas sucedan. Por ejemplo, fabricar computadoras implica <strong>tecnología</strong>.<br>
+        - En economía, la palabra <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><strong><em>capital</em></strong></span></span> se refiere al capital físico: equipo, maquinaria y herramientas utilizados en la producción, no al capital financiero que a menudo se menciona coloquialmente.
+      </p>
+    </div>
+    <div id="tabMicro8" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Derechos de propiedad en un sistema de mercado</h3>
+      <p class="text-black mb-6 text-justify">
+        Los <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span> son fundamentales para el funcionamiento eficiente de una <strong>economía de mercado</strong>. Estos derechos establecen quién es el dueño de qué y qué puede hacer con esa propiedad. En sociedades con derechos claros, el proceso de compra y venta es transparente y funcional, permitiendo que el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">mercado</span>
+        </span> asigne recursos de manera óptima según la demanda.
+        <br><br>
+        Para ilustrar la importancia de los 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span>, consideremos un escenario con diferentes tipos de casas: azules, rosadas y anaranjadas. En una economía de mercado funcional, los dueños pueden vender sus propiedades al mejor postor. Los compradores, confiando en la seguridad de la propiedad, hacen ofertas y el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">mercado</span>
+        </span> refleja sus preferencias, incentivando la construcción de casas que se ajustan a la demanda, como las casas anaranjadas con techo abovedado.
+        <br><br>
+        En contraste, en un entorno donde los 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span> son confusos o inseguros, el riesgo para los compradores aumenta. Esto desincentiva las transacciones y puede llevar al colapso del 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">mercado</span>
+        </span>. La falta de seguridad en la propiedad dificulta la asignación de recursos y desalienta la inversión y la innovación, ya que los individuos no desean invertir en bienes cuya propiedad no puede ser confirmada ni defendida.
+        <br><br>
+        Además, se observa que sistemas de mercado sin <strong>propiedad privada</strong>, como algunas economías de estado extremas, enfrentan problemas significativos de incentivos y eficiencia. Cuando el gobierno decide quién construye qué y quién recibe qué, hay poco incentivo para innovar, invertir o producir más, lo que limita el crecimiento económico y la prosperidad.
+        <br><br>
+        Por lo tanto, los 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span> son esenciales para motivar a las personas a 
+        <em>invertir, innovar y producir</em>, asegurando que sus derechos estén protegidos y fomentando un ambiente económico dinámico y eficiente.
+      </p>
+    </div>
+    <div id="tabMicro9" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Mercados y derechos de propiedad</h3>
+      <p class="text-black mb-6 text-justify">
+        Los <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span> y los <strong>mercados</strong> están intrínsecamente vinculados. Un <em>mercado</em> se forma cuando varios participantes intercambian objetos de valor. Por ejemplo, en un <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">mercado de valores</span>
+        </span>, personas compran y venden acciones, intercambiando dinero por participación en empresas, lo que ilustra cómo fluye el valor en un mercado.
+        <br><br>
+        Igualmente, en un supermercado, al elegir productos y pagarlos en la caja, se realiza un intercambio de dinero por mercancías de valor. Este proceso demuestra que los <strong>mercados</strong> son herramientas eficientes para asignar recursos, ya que los precios y la competencia ayudan a determinar qué bienes se producen y en qué cantidad.
+        <br><br>
+        La clave para que estos <em>mercados</em> funcionen apropiadamente es la existencia de <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span>. Estos derechos implican que una entidad pueda ser dueña de algo de manera <strong>exclusiva</strong>, es decir, excluir a otros del uso y disfrute de esa propiedad. 
+        <br><br>
+        Además, los <em>derechos de propiedad</em> deben hacerse cumplir. Si alguien viola la propiedad, por ejemplo, entrando en un terreno sin permiso, el propietario tiene el derecho de exigir que se respete su exclusividad, incluso recurriendo a la ley para proteger sus bienes.
+        <br><br>
+        Otro aspecto esencial es que los <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span> deben ser <strong>transferibles</strong>. La transferencia de derechos, como comprar una acción o un bien, es lo que da vida a un mercado. Sin la posibilidad de transferir propiedad de forma segura y eficiente, los <em>mercados</em> no podrían funcionar como herramientas para asignar recursos.
+        <br><br>
+        En la vida cotidiana, estos conceptos son tan naturales que rara vez los cuestionamos. Sin embargo, en muchas partes del mundo, las fallas en el sistema de <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">derechos de propiedad</span>
+        </span> como la imposibilidad de transferir ciertos bienes, la apropiación indebida o la falta de cumplimiento legal limitan el buen funcionamiento de los <strong>mercados</strong>, afectando el desarrollo económico y la calidad de vida.
+      </p>
+    </div>
+    <div id="tabMicro10" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Resumen de la lección: los sistemas económicos, el papel de los incentivos y el modelo de flujo circular</h3>
+
+      <p class="text-black mb-6 text-justify">
+        Los <strong>términos clave</strong> de la lección se centran en cómo operan los sistemas económicos, el rol de los incentivos y el funcionamiento del <em>modelo de flujo circular</em>. Se definen conceptos esenciales que explican la interacción entre 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Mercado</span>
+        </span>, 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Familias</span>
+        </span>, 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Empresas</span>
+        </span> y otros elementos en una <em>economía</em>.
+        <br><br>
+        <strong>Términos clave</strong>
+        <br><br>
+        <div style="overflow-x:auto;">
+          <table class="border-2 border-dashed border-yellow-700 w-full mb-6">
+            <tr>
+              <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">Término</th>
+              <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">Definición</th>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Mercado</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Un lugar donde los consumidores y los productores se encuentran para participar en un intercambio voluntario y mutuamente beneficioso de bienes, servicios o factores de producción.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Familias</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Los propietarios de los factores (que se ofrecen a las empresas en el mercado de factores) y los consumidores de bienes y servicios (que se demandan a las empresas en el mercado de productos).</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Empresas</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Entidades comerciales que demandan tierra, trabajo y capital a las familias en el mercado de factores para producir bienes y servicios que ofrecen a las familias en el mercado de productos.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Mercado de factores</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Donde las familias ofrecen tierra, trabajo, capital e iniciativa empresarial o tecnología a las empresas a cambio de dinero.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Mercado de productos</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Donde las empresas ofrecen bienes y servicios a las familias a cambio de dinero.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Sistema económico</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Un sistema de asignación de los medios de producción y de los bienes y servicios producidos en una economía.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Salarios</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">El pago que las empresas hacen a las familias a cambio de su trabajo.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Renta</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">El pago que las empresas hacen a las familias a cambio de tierra.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Interés</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">El pago que las empresas hacen a las familias a cambio de capital.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Ganancia</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">El pago a los emprendedores que inician o poseen empresas.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Economía de mercado</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">En su forma más pura, una economía de mercado responde a las tres preguntas económicas con una asignación de recursos y bienes en los mercados, donde se generan los precios.</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Economía planificada</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">En su forma más pura, una economía planificada responde a las tres preguntas económicas con una toma de decisiones de asignación centralizada por el gobierno.</td>
+            </tr>
+          </table>
+        </div>
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        <strong>Modelo clave</strong><br><br>
+        El <em>modelo de flujo circular</em> ilustra cómo funciona una <strong>economía de mercado</strong>. En este modelo, las familias y las empresas entablan un intercambio mutuamente beneficioso de factores y productos dentro del mercado.
+        <br><br>
+        Las familias poseen los factores de producción y venden trabajo a cambio de un salario, tierra a cambio de una renta y capital a cambio de un interés. Las empresas venden bienes y servicios a cambio de dinero.
+        <br><br>
+        <div style="overflow-x:auto;">
+          <table class="border-2 border-dashed border-yellow-700 w-full mb-6">
+            <tr>
+              <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">Agente</th>
+              <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">Vende</th>
+              <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">A cambio de</th>
+              <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">A quién</th>
+              <th class="border-2 border-dashed border-yellow-700 px-4 py-2 bg-yellow-200 text-black">En qué mercado</th>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Las familias</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Tierra</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Renta</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">A las empresas</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">En el mercado de factores</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Las familias</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Trabajo</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Salario</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">A las empresas</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">En el mercado de factores</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Las familias</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Capital</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Interés</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">A las empresas</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">En el mercado de factores</td>
+            </tr>
+            <tr>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Las empresas</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Bienes y servicios</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">Dinero</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">A las familias</td>
+              <td class="border-2 border-dashed border-yellow-700 px-4 py-2 text-black">En el mercado de productos</td>
+            </tr>
+          </table>
+        </div>
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        <strong>Imagen y funcionamiento</strong><br><br>
+        <img src="https://cdn.kastatic.org/ka-perseus-images/70d0468d96fa55efa03615f27a48e47d791ba440.png" alt="Diagrama del flujo circular">
+        <br><br>
+        En este modelo, el dinero fluye en una dirección (en sentido contrario a las manecillas del reloj) y los bienes, servicios y factores fluyen en la dirección opuesta (en el sentido de las manecillas del reloj). En una 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>economía de mercado</em></span>
+        </span>, una de las principales funciones del 
+        <strong>dinero</strong> es facilitar el intercambio de bienes en el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>mercado de productos</em></span>
+        </span> y el intercambio de factores en el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>mercado de factores</em></span>
+        </span>.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        <strong>Recordatorios clave</strong>
+        <br><br>
+        <strong>Los derechos de propiedad</strong><br>
+        Los <em>derechos de propiedad</em> son la capacidad de poseer y utilizar recursos (y cualquier cosa hecha con esos recursos). Son como las reglas de un juego, por ejemplo el fútbol o el escondite. Cuando todos conocen las reglas y esas reglas se aplican de forma coherente, la gente puede concentrarse en jugar lo mejor posible y divertirse.
+        <br><br>
+        <strong>Los sistemas económicos</strong><br>
+        Un <em>sistema económico</em> es cualquier sistema de asignación de recursos escasos. Responde tres preguntas básicas: ¿qué se producirá, cómo se producirá y cómo se distribuirá esa producción?
+        <br><br>
+        Existen dos extremos a cómo se responden estas preguntas. En las 
+        <strong>economías planificadas</strong> es el gobierno quien toma las decisiones sobre la asignación de recursos y la asignación de la producción y el consumo. En las 
+        <strong>economías de mercado</strong> hay una propiedad privada de los recursos establecida por medio de los 
+        <em>derechos de propiedad</em> y los factores de producción y el consumo se coordinan por medio de 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>mercados</em></span>
+        </span>. En un sistema de mercado, los recursos se asignan de la manera más productiva por medio de precios que se determinan en los 
+        <em>mercados</em>. Estos precios actúan como una señal para los consumidores y los productores. La mayoría de las economías son 
+        <em>mixtas</em> que se encuentran entre estos dos extremos.
+        <br><br>
+        En cualquiera de los dos sistemas, un agente racional utilizaría el 
+        <em>análisis marginal</em> para asignar los recursos y la producción. En las 
+        <strong>economías planificadas</strong> esto es más difícil porque, si no hay 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative"><em>mercados</em></span>
+        </span>, los precios no pueden ser una señal eficaz.
+      </p>
+    </div>
+    <div id="tabMicro11" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Frontera de Posibilidades de Producción</h3>
+      <p class="text-black mb-6 text-justify">
+        Imagina que eres un cazador y recolector tratando de repartir tu tiempo entre <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">cazar</span>
+        </span> y <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">recolectar</span>
+        </span>. Supongamos que solo puedes cazar conejos y recolectar bayas. Diferentes escenarios te muestran cómo distribuir tu tiempo entre estas actividades y sus resultados en cantidad de conejos y bayas.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Por ejemplo, si dedicas todo tu tiempo a cazar, podrías obtener <strong>5 conejos</strong> pero <em>0 bayas</em>. Si divides tu tiempo, tal vez logres <strong>4 conejos</strong> y recolectes <strong>100 bayas</strong>. Asumimos el principio <em>ceteris paribus</em> – que todo lo demás se mantiene constante – para analizar cada escenario.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        A medida que cambias la cantidad de tiempo dedicado a cazar versus recolectar, obtendrás distintas combinaciones de conejos y bayas. Por ejemplo, con <strong>3 conejos</strong> podrías recolectar aproximadamente <strong>180 bayas</strong>, y así sucesivamente. Estos puntos representan diferentes escenarios en tu frontera de posibilidades de producción.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Graficamos estos escenarios en un eje: el eje horizontal representa la cantidad de <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">conejos</span>
+        </span> y el eje vertical la cantidad de <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">bayas</span>
+        </span>. Cada punto en la gráfica indica una combinación posible dada cierta distribución de tiempo entre cazar y recolectar.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        La <strong>frontera de posibilidades de producción</strong> es la línea que conecta estos puntos máximos de producción. Representa las <em>combinaciones máximas</em> de conejos y bayas que puedes obtener con tus recursos limitados y tecnología actual. Cualquier punto dentro de la frontera es posible pero no óptimo, mientras que cualquier punto fuera de la frontera es inalcanzable con los recursos disponibles.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Esta frontera te ayuda a visualizar el <strong>costo de oportunidad</strong>: para aumentar la cantidad de conejos, debes sacrificar la recolección de algunas bayas, y viceversa. De esta manera, la frontera de posibilidades de producción muestra las <em>limitaciones y trade-offs</em> que enfrentan los productores ante recursos escasos.
+      </p>
+    </div>
+    <div id="tabMicro12" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Costo de Oportunidad</h3>
+      <p class="text-black mb-6 text-justify">
+        Imagina que has estado cazando y recolectando en el <em>escenario E</em>, logrando en promedio <strong>1 conejo</strong> y <strong>280 bayas</strong>. Ahora decides que quieres más proteínas y, por tanto, más conejos. Para incrementar tu captura a <strong>2 conejos</strong> al día, debes sacrificar parte de la recolección de bayas.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Si aumentas tu producción en <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">1 conejo</span>
+        </span>, debes ceder en promedio <strong>40 bayas</strong>. Este intercambio es el <em>costo de oportunidad</em> de conseguir un conejo más en el <em>escenario E</em>. El término técnico para esta pérdida es <strong>costo marginal</strong>; en este contexto, es perder 40 bayas por cada conejo adicional.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Supón ahora que quieres ser completamente vegetariano y dejar de cazar conejos para recolectar más bayas. Si en el <em>escenario E</em> decides no cazar conejos y aumentar la recolección en <strong>20 unidades</strong> de bayas, debes renunciar a <strong>1 conejo</strong>. Esto significa que el <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">costo de oportunidad</span>
+        </span> de obtener 20 bayas adicionales es perder 1 conejo.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Para expresarlo en términos de <strong>costo marginal</strong>, si asumes que la relación es lineal, el costo de oportunidad de <em>1 baya</em> sería perder <em>1/20 de conejo</em>. En otras palabras, para cada baya adicional que recolectas, cedes una pequeña fracción de un conejo.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Este concepto se puede aplicar a otros puntos en la <em>frontera de posibilidades de producción</em>. Por ejemplo, si estás en el <em>escenario B</em> y quieres un conejo extra, puedes calcular cuántas bayas debes sacrificar. De igual forma, si deseas más bayas, determina cuántos conejos debes renunciar. Esto te ayuda a comprender las compensaciones y decisiones que implica la asignación de recursos en distintas situaciones.
+      </p>
+    </div>
+    <div id="tabMicro13" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Aumento del Costo de Oportunidad</h3>
+      <p class="text-black mb-6 text-justify">
+        El <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">costo de oportunidad</span>
+        </span> varía al cambiar de un escenario a otro. Partiendo del <em>escenario EFE</em>, en el que solo se recolectan bayas y no se cazan conejos, al desear aumentar la cantidad de conejos, se debe renunciar a una parte de la recolección de bayas. Por ejemplo, para pasar al <em>escenario E</em> y obtener un conejo adicional, es necesario dejar de cosechar <strong>20 bayas</strong>. Así, el costo de oportunidad de ese conejo es de 20 bayas.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Conforme se incrementa la cantidad de conejos, el costo de oportunidad aumenta. Para obtener <strong>2 conejos</strong> adicionales en lugar de 1, se renuncian a <strong>40 bayas</strong>; para <strong>3 conejos</strong>, a <strong>60 bayas</strong>, y así sucesivamente. Esto se debe a que, al cazar más conejos, se dedican recursos y tiempo a actividades menos eficientes en recolección de bayas, sacrificando gradualmente mayores cantidades de estos últimos.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        Este fenómeno se refleja gráficamente en la <em>frontera de posibilidades de producción</em> como una curva cóncava. A medida que aumenta la producción de conejos, la pendiente negativa de la curva se vuelve más pronunciada, indicando que cada conejo adicional tiene un costo de oportunidad mayor en términos de bayas renunciadas.
+      </p>
+      <p class="text-black mb-6 text-justify">
+        En esencia, el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">aumento del costo de oportunidad</span>
+        </span> muestra que, al incrementar la producción de un bien, se deben sacrificar cantidades crecientes del otro bien debido a la disponibilidad decreciente de recursos para la actividad alternativa.
+      </p>
+    </div>
+    <div id="tabMicro17" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Análisis del Comercio entre Productos: Tazas y Platos</h3>
+
+      <p class="text-black mb-6 text-justify">
+        En el mundo de la <strong>producción de vajillas</strong>, se analizan dos productos principales: 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">tazas</span>
+        </span> 
+        y 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">platos</span>
+        </span>. Se establece un eje para cada producto y se introduce a un productor llamado <strong>Alfredo</strong>, quien se especializa en la producción de estos artículos.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Si Alfredo se concentra exclusivamente en producir 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">tazas</span>
+        </span>, su rendimiento alcanza 
+        <strong>30 tazas</strong> diarias. Por otro lado, dedicándose por completo a los 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">platos</span>
+        </span>, logra producir 
+        <strong>10 platos</strong> al día. Estos dos puntos se conectan mediante una línea recta que representa la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">frontera de posibilidades de producción</span>
+        </span> lineal para Alfredo.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Se introduce un segundo productor, <strong>Gaby</strong>, quien se especializa en la producción de 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">platos</span>
+        </span>. Al establecer sus capacidades de producción, se determina el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">costo de oportunidad</span>
+        </span> asociado a cambiar la producción entre tazas y platos.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Se asume un precio equitativo en el intercambio: por ejemplo, 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">una taza equivale a un plato</span>
+        </span>. Con esta tasa de intercambio, Alfredo puede comerciar parte de su producción para obtener platos, y Gaby puede hacer lo propio para conseguir tazas.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        La especialización en función de la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventaja comparativa</span>
+        </span> permite que cada productor maximice su eficiencia. Alfredo se especializa en 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">tazas</span>
+        </span> mientras Gaby se concentra en 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">platos</span>
+        </span>. Al comerciar, ambos productores alcanzan combinaciones de productos que superan sus propias 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">fronteras de producción</span>
+        </span> iniciales, beneficiándose mutuamente.
+      </p>
+    </div>
+    <div id="tabMicro18" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Ventaja Comparativa vs Ventaja Absoluta</h3>
+
+      <p class="text-black mb-6 text-justify">
+        Es fundamental distinguir entre <strong>ventaja absoluta</strong> y 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventaja comparativa</span>
+        </span>. La <strong>ventaja absoluta</strong> se refiere a ser más productivo en la producción de un bien utilizando los mismos insumos, mientras que la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventaja comparativa</span>
+        </span> se basa en producir un bien a un costo de oportunidad menor que el de otros actores económicos.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Por ejemplo, se observó que 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Gaby</span>
+        </span> tenía una 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventaja comparativa</span>
+        </span> en 
+        <em>platos</em> respecto a 
+        <em>Alfredo</em>, mientras que Alfredo contaba con una 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventaja comparativa</span>
+        </span> en 
+        <em>tazas</em>. Aun así, esto se diferencia de la 
+        <strong>ventaja absoluta</strong>, que se enfocaría en la productividad total con los mismos recursos.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Consideremos un escenario en el que ambos productores, Alfredo y Gaby, mejoran sus capacidades. Alfredo logra producir 
+        <strong>40 tazas</strong> y 
+        <strong>40 platos</strong>, obteniendo así una 
+        <strong>ventaja absoluta</strong> en ambos productos sobre Gaby cuando se utilizan los mismos insumos. No obstante, las 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventajas comparativas</span>
+        </span> persisten y dependen de los 
+        <em>costos de oportunidad</em> relativos para cada productor.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Para determinar esto, se calculan los 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">costos de oportunidad</span>
+        </span> asociados a cambiar la producción. Por ejemplo, para Alfredo, producir un plato tiene un costo de oportunidad de 
+        <strong>1 taza</strong>. A pesar de su 
+        <strong>ventaja absoluta</strong>, las 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventajas comparativas</span>
+        </span> se fundamentan en cuánto debe sacrificar cada productor para ajustar su producción, orientando la especialización y el comercio.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Al aprovechar sus 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ventajas comparativas</span>
+        </span>, Alfredo y Gaby pueden beneficiarse mutuamente. La especialización basada en estas ventajas permite que ambos obtengan combinaciones de productos superiores a lo que podrían alcanzar de manera independiente, demostrando la importancia de la especialización y el comercio para mejorar la eficiencia y los resultados económicos.
+      </p>
+    </div>
+
+    <!-- MACROECONOMÍA TABS -->
+    <div id="tabMacro3" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Flujo Circular de Ingresos y Gastos</h3>
+
+      <p class="text-black mb-6 text-justify">
+        Imagina un país compuesto por una única isla habitada por una sola persona. Este habitante posee una casa y tierra para sembrar. Para formalizar su economía, crea una 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">empresa</span>
+        </span>, estableciendo una entidad legal corporativa. Él es dueño de la empresa y, además de ser el ocupante de la casa, proporciona todos los 
+        <strong>factores de producción</strong>: renta de su edificio, tierra, trabajo y espíritu empresarial.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        A cambio, la empresa le paga al dueño ingresos por el uso de sus factores. Por ejemplo, recibe 
+        <strong>$1,000</strong> anuales por la renta del edificio, otros 
+        <strong>$1,000</strong> por la renta de la tierra y 
+        <strong>$1,000</strong> por su trabajo, más cualquier ganancia derivada de la empresa. Estos pagos corresponden a las rentas y salarios que la empresa ofrece por el uso de 
+        <em>su propio capital</em> y trabajo.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        La empresa, al recibir los factores de producción, utiliza la mano de obra y la tierra para producir bienes y servicios, por ejemplo, 
+        <strong>comida y hogar</strong>. El propietario, que también es el trabajador, necesita consumir estos bienes y servicios para sobrevivir. 
+        Así, se establece un ciclo en el que él renta su propia propiedad a la empresa, quien produce bienes y le paga al dueño, cerrando el círculo de 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ingresos y gastos</span>
+        </span>.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Al observar las transacciones, se pueden calcular los 
+        <strong>gastos totales</strong> del habitante, que suman 
+        <strong>$3,500</strong> anuales (por ejemplo, en comida, renta del edificio, y otros servicios). Simultáneamente, se contabilizan los 
+        <strong>ingresos totales</strong> recibidos por el dueño, que también ascienden a 
+        <strong>$3,500</strong>, considerando las rentas, salarios y ganancias.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Desde la perspectiva de la empresa, sus <strong>ingresos totales</strong> son la suma de los pagos por bienes vendidos (como comida) más las rentas por el uso de la tierra y la mano de obra. Los 
+        <strong>gastos</strong> de la empresa incluyen pagos de renta al dueño por el edificio, la tierra y el salario del trabajador. Lo que resta de los ingresos se convierte en 
+        <em>ganancia</em>, que en este caso equivale a 
+        <strong>$500</strong>.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Este escenario ilustra el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">flujo circular</span>
+        </span> de bienes, servicios, ingresos y gastos en una economía. A pesar de ser un modelo muy simplificado con un solo individuo, empresa y mercado permite comprender cómo los 
+        <strong>recursos</strong> y 
+        <strong>dinero</strong> circulan entre los productores y consumidores, formando un ciclo continuo esencial en la economía.
+      </p>
+    </div>
+    <div id="tabMacro4" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Análisis del producto interno bruto</h3>
+
+      <p class="text-black mb-6 text-justify">
+        El <strong>Producto Interno Bruto (PIB)</strong> en un modelo económico sencillo basado en una isla habitada por una persona que posee una compañía. La interacción entre el dueño, la empresa y los bienes y servicios creados en la isla ilustra el flujo circular de la actividad económica y sirve para definir el PIB.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        La definición formal del <strong>PIB</strong> es el valor de mercado de <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">todos los bienes y servicios finales</span>
+        </span> producidos dentro de un país en un período determinado. El uso de "bienes y servicios finales" evita la doble contabilización de productos intermediarios y se centra en el valor agregado al final de la cadena productiva.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        El <strong>valor de mercado</strong> de los productos finales es clave para calcular el PIB, ya que refleja cuánto está dispuesto a pagar el mercado por esos bienes y servicios. Este valor puede fluctuar por cambios en la oferta y demanda, como en el ejemplo de aguacates y naranjas, donde la contribución del PIB depende del precio de mercado de cada fruto.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Es fundamental distinguir entre <em>actividades incluidas</em> y <em>excluidas</em> del PIB. No se cuentan bienes y servicios ilegales ni el trabajo no remunerado en el hogar, pues el PIB solo incluye transacciones con intercambio de dinero verificable. Esto asegura que se mida correctamente el valor total de la producción real y evite duplicaciones.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Para evitar la doble contabilización, solo se toma en cuenta el <strong>bien final</strong> en la medición del PIB. Por ejemplo, al producir pantalones de mezclilla, se incluye únicamente el valor del producto final (los pantalones), ignorando el valor de los insumos intermedios (algodón, hilo, tela).
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        El modelo también diferencia el <strong>Producto Interno Bruto</strong> del <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Producto Nacional Bruto (PNB)</span>
+        </span>. Mientras el PIB cuenta la producción dentro de las fronteras de un país sin importar quién la produzca, el PNB se centra en la producción generada por los ciudadanos del país, sin importar dónde estén localizados.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        En resumen, el PIB proporciona una medida del valor total de los bienes y servicios producidos dentro de un país durante un período determinado, lo que permite evaluar la actividad económica y entender el flujo de ingresos y gastos en la economía.
+      </p>
+    </div>
+    <div id="tabMacro5" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Más información sobre las contribuciones finales e intermedias en el PIB</h3>
+
+      <p class="text-black mb-6 text-justify">
+        Analizaremos cómo se determina la <strong>contribución al Producto Interno Bruto (PIB)</strong> a lo largo de diferentes periodos, distinguiendo entre bienes intermedios y bienes finales. En un ejemplo anterior, se siguió la transformación del algodón en pantalones de mezclilla, observando los valores de mercado en cada etapa: inicialmente el algodón en rama tenía un valor de 
+        <strong>$10</strong>, luego el hilo de algodón pasó a valer 
+        <strong>$20</strong> y finalmente los pantalones de mezclilla alcanzaron un valor de 
+        <strong>$50</strong>. 
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Para el cálculo del PIB, solo se cuenta el <em>producto final</em>, en este caso, los pantalones de mezclilla con un valor de 
+        <strong>$50</strong>. Sin embargo, si el periodo de medición no abarca todo un año, se deben considerar las contribuciones intermedias a lo largo de intervalos más cortos.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Supongamos que se divide el análisis en dos periodos. En el <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Periodo 1</span>
+        </span>, se produce y se valora el hilo de algodón en 
+        <strong>$20</strong>, el cual se almacena como inventario. Este bien intermedio se considera una inversión, ya que se utilizará en el futuro para producir bienes finales. En el 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">Periodo 2</span>
+        </span>, se completan los pantalones de mezclilla valorados en 
+        <strong>$50</strong>.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Para evitar la doble contabilización del valor del hilo producido en el Periodo 1 al calcular el PIB del Periodo 2, se resta el valor de los bienes intermedios ya contabilizados. Es decir, en el Periodo 2, la contribución final al PIB se calcula restando el valor del inventario del Periodo 1 al valor del bien final producido. De esta manera, si el valor final de los pantalones es 
+        <strong>$50</strong> y se tiene un inventario inicial de 
+        <strong>$20</strong>, la 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">contribución neta</span>
+        </span> al PIB en el Periodo 2 es 
+        <strong>$30</strong>.
+      </p>
+    </div>
+    <div id="tabMacro6" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">Inversión y consumo</h3>
+
+      <p class="text-black mb-6 text-justify">
+        En este análisis se compara <strong>inversión</strong> y <strong>consumo</strong> desde dos perspectivas: la cotidiana y la económica. Aunque los términos son similares, su significado varía según el contexto. Se utiliza una línea divisoria para separar ambos contextos y se explica cómo influyen en la medición del <strong>Producto Interno Bruto (PIB)</strong>.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        En el contexto cotidiano, 
+        <em>inversión</em> se entiende como una acción que se realiza para obtener una ganancia futura, como construir una casa o invertir en educación. Por ejemplo, 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ir a la universidad</span>
+        </span> se considera una inversión, ya que se espera que conduzca a mejores oportunidades laborales y salarios futuros. Por otro lado, 
+        <em>consumo</em> implica gastar en bienes o servicios para un uso inmediato, como comprar un dulce o ir al cine, lo cual mejora la calidad de vida a corto plazo.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Desde el punto de vista <strong>económico</strong>, la inversión se define como el gasto en 
+        <span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">bienes de capital</span>
+        </span>, incluyendo maquinaria, inventario, estructuras y nuevas casas. Estos gastos se enfocan en la producción futura y en la creación de valor adicional. Por otro lado, el consumo económico se refiere al gasto en 
+        <em>bienes y servicios finales</em> por parte de los ocupantes del hogar, excluyendo la compra de casas nuevas cuando se trata solo de transferir propiedad.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        En términos de contabilidad nacional, la educación pagada por un individuo se considera 
+        <em>consumo</em> porque es un gasto en servicios finales. Similarmente, la compra de un automóvil nuevo se clasifica como 
+        <em>consumo</em>, aunque en un contexto cotidiano puede verse como una inversión personal. Esta clasificación facilita la contabilidad al agrupar los gastos empresariales como inversión y los gastos de los hogares como consumo.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        En resumen, la distinción entre inversión y consumo, tanto cotidiana como económica, permite contabilizar de manera precisa el gasto en el PIB. La inversión en bienes de capital por parte de las empresas se considera esencial para la producción futura, mientras que el consumo abarca los gastos en bienes y servicios finales, que son medibles y relevantes para el cálculo del Producto Interno Bruto.
+      </p>
+    </div>
+    <div id="tabMacro7" class="tab hidden">
+      <h3 class="text-2xl font-bold text-yellow-700 mb-2 text-center">El PIB desde el enfoque del gasto y del ingreso</h3>
+
+      <p class="text-black mb-6 text-justify">
+        El Producto Interno Bruto (PIB) puede ser analizado desde dos perspectivas equivalentes: el enfoque basado en los 
+        <strong><span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">gastos</span>
+        </span></strong> y el basado en los 
+        <strong><span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ingresos</span>
+        </span></strong>. Estas dos vías llevan al mismo resultado numérico en el PIB, aunque conceptualmente se observan aspectos distintos de la economía.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Para ilustrar este concepto, se considera una economía simplificada con múltiples hogares y empresas. Los hogares son propietarios de todos los 
+        <strong>factores de producción</strong> y los arriendan a las empresas. Estos factores incluyen 
+        <em>trabajo, tierra, capital</em> y 
+        <em>espíritu empresarial</em>. Las empresas utilizan estos recursos para producir todos los bienes y servicios, generando ingresos que luego se transforman en 
+        <strong><span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">gastos</span>
+        </span></strong> para los hogares.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        Desde la perspectiva de los hogares, sus 
+        <strong><span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">gastos totales</span>
+        </span></strong> en bienes y servicios son iguales a los 
+        <strong><span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ingresos totales</span>
+        </span></strong> que reciben por rentar sus factores a las empresas, sumados a las 
+        <strong>ganancias</strong> que obtienen como dueños de las compañías. Este ciclo continuo entre 
+        <strong><span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">gastos</span>
+        </span></strong> e 
+        <strong><span class="relative inline-block" style="z-index:0;">
+          <span class="absolute bottom-0 left-0 right-0 h-[0.75em] bg-yellow-500" style="z-index:-1;"></span>
+          <span class="relative">ingresos</span>
+        </span></strong> ilustra cómo, en una economía simplificada, el PIB calculado desde el punto de vista de los 
+        <strong>gastos</strong> coincide con el PIB calculado desde el punto de vista de los 
+        <strong>ingresos</strong>.
+      </p>
+
+      <p class="text-black mb-6 text-justify">
+        En resumen, ya sea que se mida el PIB considerando los 
+        <em>gastos de los hogares</em> en bienes y servicios o los 
+        <em>ingresos de las empresas</em> y de los hogares, el resultado final es el mismo. Esto demuestra la consistencia y equivalencia entre ambos enfoques a la hora de calcular el PIB, fundamento esencial en la contabilidad nacional.
+      </p>
+    </div>
+  </div>
+
+  <!-- Botón HOME (opcional) -->
+  <button id="homeButton" class="fixed bottom-4 right-4 bg-yellow-600 p-3 rounded-full shadow-lg">
+    <i class="fas fa-home text-white text-xl"></i>
+  </button>
+
+  <!-- JAVASCRIPT -->
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
